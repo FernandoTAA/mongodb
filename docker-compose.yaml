@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    env_file:
+      - .env
+    volumes:
+      - ./mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./volumes/mongo/db/:/data/db
+    ports:
+      - 27017-27019:27017-27019
+    networks:
+      - partner-network
+
+networks:
+  partner-network:
+    driver: bridge
